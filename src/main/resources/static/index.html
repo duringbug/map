@@ -1,0 +1,237 @@
+<!--
+ * @Description: 
+ * @Author: 唐健峰
+ * @Date: 2023-05-26 13:41:12
+ * @LastEditors: ${author}
+ * @LastEditTime: 2023-05-27 13:19:09
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body,
+        html,
+        #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript"
+        src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=CYkGLU54aTXtfFIn8Fwg0FBwrUKGN2ne"></script>
+    <title>地图</title>
+    <link href="./dist/index.css" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <h1 class="text-3xl font-bold text-blue-600 underline text-center">
+            求电网最短路径
+        </h1>
+    </div>
+    <div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+    // GL版命名空间为BMapGL
+    // 按住鼠标右键，修改倾斜角和角度
+    var map = new BMapGL.Map("allmap");    // 创建Map实例
+    map.centerAndZoom(new BMapGL.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+    //添加点位
+    var point = new BMapGL.Point(116.404, 39.915);
+    var marker = new BMapGL.Marker(point);        // 创建标注   
+    map.addOverlay(marker);                     // 将标注添加到地图中
+
+    var myIcon = new BMapGL.Icon("markers.png", new BMapGL.Size(23, 25), {
+        // 指定定位位置。  
+        // 当标注显示在地图上时，其所指向的地理位置距离图标左上   
+        // 角各偏移10像素和25像素。您可以看到在本例中该位置即是  
+        // 图标中央下端的尖角位置。   
+        anchor: new BMapGL.Size(10, 25),
+        // 设置图片偏移。  
+        // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您  
+        // 需要指定大图的偏移位置，此做法与css sprites技术类似。   
+        imageOffset: new BMapGL.Size(0, 0 - 25)   // 设置图片偏移   
+    });
+    // 创建标注对象并添加到地图  
+    var marker = new BMapGL.Marker(point, { icon: myIcon });
+    map.addOverlay(marker);
+    marker.addEventListener("click", function () {
+        alert("您点击了标注");
+    });
+
+
+    //添加折线
+    var polyline1 = new BMapGL.Polyline([
+        new BMapGL.Point(116.405289, 39.904987),
+        new BMapGL.Point(117.190186, 39.125595),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline1);
+    var polyline2 = new BMapGL.Polyline([
+        new BMapGL.Point(113.28064, 23.125177),
+        new BMapGL.Point(114.16546, 22.27534),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline2);
+    var polyline3 = new BMapGL.Polyline([
+        new BMapGL.Point(118.76741, 32.041546),
+        new BMapGL.Point(117.283043, 31.861191),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline3);
+    var polyline4 = new BMapGL.Polyline([
+        new BMapGL.Point(121.472641, 31.2317),
+        new BMapGL.Point(120.15358, 30.287458),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline4);
+    var polyline5 = new BMapGL.Polyline([
+        new BMapGL.Point(112.549248, 37.857014),
+        new BMapGL.Point(114.502464, 38.045475),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline5);
+    var polyline6 = new BMapGL.Polyline([
+        new BMapGL.Point(103.83417, 36.06138),
+        new BMapGL.Point(101.77782, 36.61729),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline6);
+    var polyline7 = new BMapGL.Polyline([
+        new BMapGL.Point(125.324501, 43.886841),
+        new BMapGL.Point(126.642464, 45.756966),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline7);
+    var polyline8 = new BMapGL.Polyline([
+        new BMapGL.Point(118.76741, 32.041546),
+        new BMapGL.Point(120.15358, 30.287458),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline8);
+    var polyline9 = new BMapGL.Polyline([
+        new BMapGL.Point(119.306236, 26.075302),
+        new BMapGL.Point(121.520076, 25.030724),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline9);
+    var polyline10 = new BMapGL.Polyline([
+        new BMapGL.Point(117.190186, 39.125595),
+        new BMapGL.Point(114.502464, 38.045475),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline10);
+    var polyline11 = new BMapGL.Polyline([
+        new BMapGL.Point(114.298569, 30.584354),
+        new BMapGL.Point(115.892151, 28.676493),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline11);
+    var polyline12 = new BMapGL.Polyline([
+        new BMapGL.Point(106.504959, 29.533155),
+        new BMapGL.Point(104.065735, 30.659462),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline12);
+    var polyline13 = new BMapGL.Polyline([
+        new BMapGL.Point(114.502464, 38.045475),
+        new BMapGL.Point(117.000923, 36.675808),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline13);
+    var polyline14 = new BMapGL.Polyline([
+        new BMapGL.Point(123.429092, 41.796768),
+        new BMapGL.Point(125.324501, 43.886841),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline14);
+    var polyline15 = new BMapGL.Polyline([
+        new BMapGL.Point(112.982277, 28.19409),
+        new BMapGL.Point(115.892151, 28.676493),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline15);
+    var polyline16 = new BMapGL.Polyline([
+        new BMapGL.Point(114.298569, 30.584354),
+        new BMapGL.Point(117.283043, 31.861191),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline16);
+    var polyline17 = new BMapGL.Polyline([
+        new BMapGL.Point(106.504959, 29.533155),
+        new BMapGL.Point(106.713478, 26.578342),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline17);
+    var polyline18 = new BMapGL.Polyline([
+        new BMapGL.Point(111.75199, 40.84149),
+        new BMapGL.Point(112.549248, 37.857014),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline18);
+    var polyline19 = new BMapGL.Polyline([
+        new BMapGL.Point(106.23248, 38.48644),
+        new BMapGL.Point(103.83417, 36.06138),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline19);
+    var polyline20 = new BMapGL.Polyline([
+        new BMapGL.Point(112.549248, 37.857014),
+        new BMapGL.Point(113.665413, 34.757977),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline20);
+    var polyline21 = new BMapGL.Polyline([
+        new BMapGL.Point(110.19989, 20.04422),
+        new BMapGL.Point(108.320007, 22.82402),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline21);
+    var polyline22 = new BMapGL.Polyline([
+        new BMapGL.Point(110.19989, 20.04422),
+        new BMapGL.Point(113.54913, 22.19875),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline22);
+    var polyline23 = new BMapGL.Polyline([
+        new BMapGL.Point(102.71225, 25.040609),
+        new BMapGL.Point(106.713478, 26.578342),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline23);
+    var polyline24 = new BMapGL.Polyline([
+        new BMapGL.Point(113.665413, 34.757977),
+        new BMapGL.Point(108.948021, 34.263161),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline24);
+    var polyline25 = new BMapGL.Polyline([
+        new BMapGL.Point(115.892151, 28.676493),
+        new BMapGL.Point(119.306236, 26.075302),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline25);
+    var polyline26 = new BMapGL.Polyline([
+        new BMapGL.Point(108.320007, 22.82402),
+        new BMapGL.Point(106.713478, 26.578342),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline26);
+    var polyline27 = new BMapGL.Polyline([
+        new BMapGL.Point(113.665413, 34.757977),
+        new BMapGL.Point(117.283043, 31.861191),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline27);
+    var polyline28 = new BMapGL.Polyline([
+        new BMapGL.Point(113.28064, 23.125177),
+        new BMapGL.Point(110.19989, 20.04422),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline28);
+    var polyline29 = new BMapGL.Polyline([
+        new BMapGL.Point(108.948021, 34.263161),
+        new BMapGL.Point(103.83417, 36.06138),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline29);
+    var polyline30 = new BMapGL.Polyline([
+        new BMapGL.Point(112.982277, 28.19409),
+        new BMapGL.Point(113.28064, 23.125177),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline30);
+    var polyline31 = new BMapGL.Polyline([
+        new BMapGL.Point(123.429092, 41.796768),
+        new BMapGL.Point(117.190186, 39.125595),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline31);
+    var polyline32 = new BMapGL.Polyline([
+        new BMapGL.Point(104.065735, 30.659462),
+        new BMapGL.Point(91.1145, 29.64415),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline32);
+    var polyline33 = new BMapGL.Polyline([
+        new BMapGL.Point(101.77782, 36.61729),
+        new BMapGL.Point(87.61688, 43.82663),
+    ], { strokeColor: "blue", strokeWeight: 10, strokeOpacity: 0.5 });
+    map.addOverlay(polyline33);
+</script>
