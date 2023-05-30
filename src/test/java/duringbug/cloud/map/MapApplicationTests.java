@@ -3,7 +3,7 @@
  * @Author: 唐健峰
  * @Date: 2023-05-26 17:20:22
  * @LastEditors: ${author}
- * @LastEditTime: 2023-05-29 18:39:24
+ * @LastEditTime: 2023-05-30 12:52:50
  */
 /*
  * @Description: 
@@ -85,8 +85,8 @@ class MapApplicationTests {
         // cityMap.addSpecailLine("杭州市","长沙市");
         // cityMap.addSpecailLine("郑州市","武汉市");
         // cityMap.addSpecailLine("武汉市","西宁市");
-        cityMap.notIncludeLine("香港", "澳门");
-        cityMap.notIncludeLine("澳门", "广州市");
+        // cityMap.notIncludeLine("香港", "澳门");
+        // cityMap.notIncludeLine("澳门", "广州市");
         System.out.println(cityMap.getMinLength()+"公里");
 
         stopWatch.stop();
@@ -108,27 +108,27 @@ class MapApplicationTests {
         int cout=0;
         for(Road road:rArrayList)
         {
-            System.out.print(road.getFrom()+" "+road.getTo()+" "+road.getDist()+"\t");
-            // for(int i=1;i<=34;i++)
-            // {
-            //     if(cityArray[i].name.equals(road.getFrom()))
-            //     {
-            //         for(int j=1;j<=34;j++)
-            //         {
-            //             if(cityArray[j].name.equals(road.getTo()))
-            //             {
-            //                 cout=cout+1;
-            //                 System.out.println(
-            //                 "var polyline"+cout+" = new BMapGL.Polyline([\n"+
-            //                 "new BMapGL.Point("+cityArray[i].x+","+ cityArray[i].y+"),\n"+
-            //                 "new BMapGL.Point("+cityArray[j].x+","+ cityArray[j].y+"),\n"+
-            //                 "], { strokeColor: \"blue\", strokeWeight: 10, strokeOpacity: 0.5 });\n"+
-            //                 "map.addOverlay(polyline"+cout+");"
-            //                 );
-            //             }
-            //         }
-            //     }
-            // }
+            // System.out.print(road.getFrom()+" "+road.getTo()+" "+road.getDist()+"\t");
+            for(int i=1;i<=34;i++)
+            {
+                if(cityArray[i].name.equals(road.getFrom()))
+                {
+                    for(int j=1;j<=34;j++)
+                    {
+                        if(cityArray[j].name.equals(road.getTo()))
+                        {
+                            cout=cout+1;
+                            System.out.println(
+                            "var polyline"+cout+" = new BMapGL.Polyline([\n"+
+                            "new BMapGL.Point("+cityArray[i].x+","+ cityArray[i].y+"),\n"+
+                            "new BMapGL.Point("+cityArray[j].x+","+ cityArray[j].y+"),\n"+
+                            "], { strokeColor: \"blue\", strokeWeight: 10, strokeOpacity: 0.5 });\n"+
+                            "map.addOverlay(polyline"+cout+");"
+                            );
+                        }
+                    }
+                }
+            }
             add+=+road.getDist();
         }
         System.out.println(add+"公里");
